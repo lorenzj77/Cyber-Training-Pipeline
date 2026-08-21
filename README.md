@@ -80,3 +80,24 @@ id_rsa*
 *.tfstate.backup
 terraform.tfvars
 *credentials*
+
+## GitHub Repository Setup — Lessons Learned
+
+Establishing this repository provided an opportunity to document and resolve several issues encountered during the initial Git and GitHub configuration. These issues included configuring Git author identity, correcting the repository remote URL, validating SSH authentication, synchronizing a local repository with an existing remote repository, resolving a `README.md` rebase conflict, and correcting accidentally created filenames.
+
+The primary lessons learned were:
+
+- Configure Git user identity before creating commits.
+- Verify the GitHub remote with `git remote -v` before attempting to push.
+- Validate SSH authentication with `ssh -T git@github.com`.
+- Synchronize local and remote repositories before pushing when the remote already contains commits.
+- Resolve merge and rebase conflicts carefully rather than using force pushes.
+- Verify filenames and directory structure with commands such as `ls`, `find`, and `git ls-files`.
+- Review repository contents before committing or pushing changes.
+- Establish a `.gitignore` before committing infrastructure code or sensitive configuration.
+- Never commit credentials, private keys, tokens, `.env` files, Terraform state files, or other sensitive information.
+- Use secret-scanning tools such as Gitleaks as an additional check against accidentally committed credentials.
+
+These experiences reinforced the importance of treating repository configuration, documentation, and security controls as part of the infrastructure build process rather than as tasks to be addressed afterward.
+
+The troubleshooting process documented during this phase is intended to provide a repeatable reference for future operators and for future rebuilds of the Cyber-Training-Pipeline environment.
