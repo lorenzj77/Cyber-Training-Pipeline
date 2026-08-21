@@ -47,4 +47,36 @@ This project follows a **document-as-you-build** approach. Procedures, configura
 
 The objective is to maintain enough documentation that a future operator — including a future version of myself — can understand **what was done, why it was done, and how to reproduce it** without relying on undocumented knowledge.
 
+## Secrets Handling
 
+Nothing that grants access to systems or resources should ever be committed to this repository.
+
+This includes, but is not limited to:
+
+- Private keys
+- API keys
+- Access tokens
+- Passwords
+- Cloud credentials
+- `.env` files containing secrets
+- Terraform state files
+- Terraform variable files containing sensitive information
+- Credential files
+
+> **Important:** Deleting a secret in a later commit does not remove it from Git history. If a secret is accidentally committed, assume it is compromised and rotate or revoke it immediately.
+
+### 0.7a — Repository Secret Protection
+
+Before the first commit containing real infrastructure code, a `.gitignore` file must exist at the repository root.
+
+At minimum, the `.gitignore` file must exclude:
+
+```text
+*.pem
+*.key
+id_rsa*
+.env
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+*credentials*
